@@ -1,0 +1,33 @@
+version: '3.2'
+services:
+  api:
+    build: .
+    command: bundle exec rails s -p 8080 -b '0.0.0.0'
+    image: puyopuyo
+    container_name: 'puyopuyo'
+    ports:
+      - 8080:8080
+    volumes:
+      - type: bind
+        source: ./
+        target: /usr/local/src
+    restart: always
+    environment:
+        TZ: Asia/Tokyo
+    links:
+        - puyopuyo-db
+  
+  puyopuyo-db:
+    image: mariadb:10.5.2
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_bin
+    environment:
+        MYSQL_ROOT_PASSWORD: puyopuyo
+        MYSQL_DATABASE: puyopuyo
+        MYSQL_USER: puyopuyo
+        MYSQL_PASSWORD: puyopuyo
+    ports:
+        - '3306:3306'
+    command: --innodb-use-native-aio=0
+    volumes:
+        - ./docker_config/db/volumes:/var/lib/mariadb
+        - ./docker_config/db/my.cnf:/etc/mysql/conf.d/my.cnf
