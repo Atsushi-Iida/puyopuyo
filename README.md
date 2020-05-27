@@ -1,7 +1,9 @@
 # puyopuyo
 
 ## 開発目的
-* Ruby on Railsの勉強のためにぷよぷよを作成
+* Ruby on Railsの勉強
+* Model層でのテーブル操作習得
+* Railsを使用した双方向通信習得
 
 ## 開発環境
 * docker for windowsを使用して開発を進めることとする
