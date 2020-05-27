@@ -21,3 +21,24 @@
 * 設定（ユーザー情報の設定など）
 * 一人モード
 * 対戦モード（コンピュータを用意するのは辛いのでオンライン対戦としたい）
+
+
+## プロジェクト作成手順
+~~~
+$ docker-compose run --rm api rails new . --force --database=mysql --skip-bundle
+
+$ docker-compose run --rm api bundle exec spring binstub --all
+
+$ docker-compose bundle
+
+./config/database.ymlにDBの接続情報を記載
+default: &default
+  adapter: mysql2
+  encoding: utf8
+  pool: 5
+  username: puyopuyo
+  password: puyopuyo
+  host: puyopuyo-db
+
+$ docker-compose up
+~~~
